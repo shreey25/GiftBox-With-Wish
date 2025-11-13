@@ -1,0 +1,162 @@
+<html>
+<head>
+<style> 
+/* --- BASE STYLES (MOSTLY UNCHANGED) --- */
+body{
+  background-color:black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.gift-box-container{
+  position:relative;
+  width: 220px;
+  height: 250px;
+}
+
+.gift-box-base{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  background-color: purple;
+  top: 100px; 
+  left: 10px;
+}
+.gift-box-base::before{
+  position: absolute;
+  content:'';
+  background-color:yellow;
+  width:35px;
+  height: 200px;
+  left: 82.5px;
+}
+
+.gift-box-lid{
+  width:220px;
+  height:30px;
+  background-color: blueviolet;
+  position: absolute;
+  top: 60;
+  left: 0; 
+  z-index: 10;
+
+  animation-name: openBox;
+  animation-duration: 1.5s; 
+  animation-delay: 1s; 
+  animation-fill-mode: forwards;
+}
+
+.gift-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* BOX FADE OUT: Starts after text is visible */
+  animation-name: fadeOutBox;
+  animation-duration: 1s; 
+  animation-delay: 4s; /* Fade out starts at 6s */
+  animation-fill-mode: forwards;
+}
+
+/* --- REVEALED PHOTO STYLES --- */
+.revealed-photo {
+  position: absolute;
+  left: 35px; 
+  top: 55px; 
+  width: 200px; 
+  height: 200px;
+  object-fit: cover;
+  opacity: 0; /* Starts invisible */
+  z-index: 9;
+
+  /* PHOTO REVEAL & FADE: Use a single keyframe to reveal and then fade the photo */
+  animation-name: revealPhotoFade;
+  animation-duration: 2.5s; /* 1s reveal + 0.5s pause + 1s fade */
+  animation-delay: 2.5s; /* Starts after lid opens */
+  animation-fill-mode: forwards;
+}
+
+/* --- HAPPY BIRTHDAY TEXT STYLES --- */
+.box2{
+  position: absolute; /* Place over the box */
+  top: 30px;
+  left: 10px;
+  width: 25
+  0px;
+  height: 200px;
+  background-color: transparent;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Starts invisible */
+  z-index: 8; /* Below photo and lid initially */
+  
+  /* TEXT REVEAL: Starts after photo fades */
+  animation-name: textPopIn; 
+  animation-duration: 1s; 
+  animation-delay: 5s; /* Starts at 5s */
+  animation-fill-mode: forwards; 
+}
+
+.box2 h3 {
+    margin: 0; 
+    font-size: 3.5em; /* Adjusted size to fit well */
+    color: #FF69B4; 
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+    text-align: center;
+}
+
+/* --- KEYFRAMES --- */
+
+/* 1. Lid Opening */
+@keyframes openBox {
+  100% { transform: translateY(-150px) rotate(-15deg); }
+}
+
+/* 2. Photo Reveal and Fade Out */
+@keyframes revealPhotoFade {
+  0%   { opacity: 0; transform: scale(0.5); }  /* Starts hidden */
+  20%  { opacity: 1; transform: scale(1); }    /* Quickly reveals */
+  60%  { opacity: 1; transform: scale(1); }    /* Holds for a moment */
+  100% { opacity: 0; transform: scale(1.2); }  /* Fades out and grows slightly */
+}
+@keyframes fadeOutBox {
+  100% {
+    opacity: 0; 
+    transform: translateY(20px); 
+    pointer-events: none; 
+  }
+}
+/* 3. Text Pop In */
+@keyframes textPopIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+
+
+
+</style>
+</head>
+<body>
+  <body>
+  <div class="gift-box-container">
+    
+    <img src="cake.png" alt="Revealed Photo" class="revealed-photo">
+
+    <div class="gift-elements">
+      <div class="gift-box-base"></div>
+      <div class="gift-box-lid"></div>
+    </div>
+    
+    <div class="box2"><h3>HAPPY BIRTHDAY</h3></div> 
+    
+  </div>
+</body>
+</body>
+</html>
